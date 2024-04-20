@@ -1,4 +1,4 @@
-def pick_cat(pick: int, cats: int) -> list:
+def pick_cat(cats: int, pick: int) -> list:
     round = pick
     picked_cats = []
     for number in range(cats + 1)[1:]:
@@ -6,9 +6,6 @@ def pick_cat(pick: int, cats: int) -> list:
             picked_cats.append(number)
             round += pick
     return picked_cats
-        
-
-# print(pick_cat(10, 100))
 
 
 def cats_in_hats(cats: int, rounds: int) -> list:
