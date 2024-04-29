@@ -3,6 +3,7 @@ import csv
 
 # Task_3
 
+
 def game_played() -> list:
     players = ["Player_1", "Player_2", "Player_3", "Player_4", "Player_5"]
     highscores = []

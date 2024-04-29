@@ -11,4 +11,4 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 with open("example.txt", "r") as file:
     text = file.read()
 with open("copy_example.txt", "w") as file:
-    file.write(text)
+    file.write(text.upper())
