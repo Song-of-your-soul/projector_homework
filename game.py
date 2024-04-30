@@ -17,7 +17,6 @@ def game_played() -> list:
             writer.writerow(i)
 
 
-
 # Task_4
 
 
@@ -42,7 +41,6 @@ def highscores():
         writer = csv.writer(file2)
         for i in score_numbers:
             writer.writerow(i)
-                    
 
 
 if __name__ == "__main__":
