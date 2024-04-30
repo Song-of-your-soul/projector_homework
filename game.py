@@ -8,20 +8,15 @@ def game_played() -> list:
     players = ["Player_1", "Player_2", "Player_3", "Player_4", "Player_5"]
     highscores = []
     for player in players:
-        highest_score = 0
         for _ in range(100):
             score = random.randint(0, 1000)
-            if score > highest_score:
-                highest_score = score
-        highscores.append([player, highest_score])
-    print(highscores)
-    with open("best_score.csv", "w") as file:
+            highscores.append([player, score])
+    with open("highscores.csv", "w", newline='') as file:
         writer = csv.writer(file)
         for i in highscores:
             writer.writerow(i)
 
 
-game_played()
 
 # Task_4
 
@@ -29,21 +24,27 @@ game_played()
 def highscores():
     highest_scores = []
     score_numbers = []
-    with open("best_score.csv", "r") as file:
+    with open("highscores.csv", "r") as file:
         reader = csv.reader(file)
         for row in reader:
-            if row != []:
-                highest_scores.append(row)
-        print(highest_scores)
+            highest_scores.append(row)
     for player in highest_scores:
-        score_numbers.append(player[1])
-    score_numbers.sort(reverse=True)
-    print(score_numbers)
+        score_numbers.append(int(player[1]))
+    sorted_scores = sorted(score_numbers, reverse=True)
+    score_numbers.clear()
     while highest_scores != []:
         for index, score in enumerate(highest_scores):
-            if score[1] == score_numbers[0]:
-                with open("high_scores.csv", "a") as file2:
-                    writer = csv.writer(file2)
-                    writer.writerow(score)
-                    score_numbers.remove(score[1])
-                    highest_scores.remove(score)
+            if int(score[1]) == sorted_scores[0]:
+                score_numbers.append(score)
+                sorted_scores.remove(sorted_scores[0])
+                highest_scores.remove(score)
+    with open("best_highscores.csv", "w", newline='') as file2:
+        writer = csv.writer(file2)
+        for i in score_numbers:
+            writer.writerow(i)
+                    
+
+
+if __name__ == "__main__":
+    game_played()
+    highscores()
