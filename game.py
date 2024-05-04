@@ -23,6 +23,9 @@ def game_played() -> list:
 def highscores():
     highest_scores = []
     score_numbers = []
+    sorted_highscores = []
+    best_for_player = []
+    players = ["Player_1", "Player_2", "Player_3", "Player_4", "Player_5"]
     with open("highscores.csv", "r") as file:
         reader = csv.reader(file)
         for row in reader:
@@ -30,16 +33,20 @@ def highscores():
     for player in highest_scores:
         score_numbers.append(int(player[1]))
     sorted_scores = sorted(score_numbers, reverse=True)
-    score_numbers.clear()
     while highest_scores != []:
         for index, score in enumerate(highest_scores):
             if int(score[1]) == sorted_scores[0]:
-                score_numbers.append(score)
+                sorted_highscores.append(score)
                 sorted_scores.remove(sorted_scores[0])
                 highest_scores.remove(score)
+    while players != []:
+        for result in sorted_highscores:
+            if result[0] in players:
+                best_for_player.append(result)
+                players.remove(result[0])
     with open("best_highscores.csv", "w", newline='') as file2:
         writer = csv.writer(file2)
-        for i in score_numbers:
+        for i in best_for_player:
             writer.writerow(i)
 
 
