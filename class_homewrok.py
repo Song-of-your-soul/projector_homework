@@ -6,12 +6,10 @@ class Country:
     def __str__(self):
         return f"{self.name} is a country with {self.population} people"
 
-
     def __add__(self, other_country):
         new_name = self.name + " " + other_country.name
         new_population = self.population + other_country.population
         return Country(new_name, new_population)
-
 
     def add(self, other_country):
         new_name = self.name + " " + other_country.name
@@ -19,6 +17,7 @@ class Country:
         return Country(new_name, new_population)
 
 # Task_1
+
 
 bosnia = Country('Bosnia', 10_000_000)
 herzegovina = Country('Herzegovina', 5_000_000)
@@ -31,6 +30,8 @@ ukraine = Country('Ukraine', 37_000_000)
 usa = Country('USA', 333_000_000)
 ukraine_usa = ukraine + usa
 print(ukraine_usa)
+
+# Task_3
 
 
 class Car:
@@ -57,15 +58,13 @@ class Car:
         return f"This is {self.brand}, {self.model}. It was made in {self.year} and it's speed is {self.speed} km\\h"
 
 
-# Task_3
-
-
 zaz = Car("ZAZ", "Slavuta", 1996, 4)
 print(zaz.display_speed())
 zaz.speed = zaz.brake
 print(zaz.display_speed())
 
 # Task_4
+
 
 class Robot:
     def __init__(self, orientation: str, position_x: int, position_y: int):
@@ -76,7 +75,6 @@ class Robot:
         self.position_x = position_x
         self.position_y = position_y
 
-    
     def move(self, steps):
         if self.orientation == "left":
             new_position = Robot(self.orientation, self.position_x - steps, self.position_y)
@@ -87,7 +85,7 @@ class Robot:
         if self.orientation == "up":
             new_position = Robot(self.orientation, self.position_x, self.position_y + steps)
         return new_position
-    
+
     def turn(self, direction):
         directions = ["left", "right"]
         rotation = ["up", "right", "down", "left"]
@@ -108,10 +106,9 @@ class Robot:
                     else:
                         new_orientation = Robot(rotation[0], self.position_x, self.position_y)
         return new_orientation
-        
+
     def display_position(self):
         return f"This robot is located at point A({self.position_x}, {self.position_y}) of our map. It is facing {self.orientation}"
-
 
 
 robo = Robot("left", 0, 0)
