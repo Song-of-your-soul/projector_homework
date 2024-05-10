@@ -11,7 +11,7 @@ def game_played() -> list:
         for _ in range(100):
             score = random.randint(0, 1000)
             highscores.append([player, score])
-    with open("highscores.csv", "w", newline='') as file:
+    with open("highscores.csv", "w", newline="") as file:
         writer = csv.writer(file)
         for i in highscores:
             writer.writerow(i)
@@ -44,7 +44,7 @@ def highscores():
             if result[0] in players:
                 best_for_player.append(result)
                 players.remove(result[0])
-    with open("best_highscores.csv", "w", newline='') as file2:
+    with open("best_highscores.csv", "w", newline="") as file2:
         writer = csv.writer(file2)
         for i in best_for_player:
             writer.writerow(i)
