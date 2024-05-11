@@ -45,14 +45,13 @@ class Car:
 
     @property
     def accelerate(self):
-        return self.speed + 5
+        self.speed += 5
 
     @property
     def brake(self):
-        if self.speed - 5 > 0:
-            return self.speed - 5
-        else:
-            return 0
+        self.speed -= 5
+        if self.speed < 0:
+            self.speed = 0
 
     def display_speed(self):
         return f"This is {self.brand}, {self.model}. It was made in {self.year} and it's speed is {self.speed} km\\h"
@@ -60,7 +59,9 @@ class Car:
 
 zaz = Car("ZAZ", "Slavuta", 1996, 4)
 print(zaz.display_speed())
-zaz.speed = zaz.brake
+zaz.accelerate
+print(zaz.display_speed())
+zaz.brake
 print(zaz.display_speed())
 
 # Task_4
@@ -77,14 +78,13 @@ class Robot:
 
     def move(self, steps):
         if self.orientation == "left":
-            new_position = Robot(self.orientation, self.position_x - steps, self.position_y)
+            self.position_x -= steps
         if self.orientation == "right":
-            new_position = Robot(self.orientation, self.position_x + steps, self.position_y)
+            self.position_x += steps
         if self.orientation == "down":
-            new_position = Robot(self.orientation, self.position_x, self.position_y - steps)
+            self.position_y -= steps
         if self.orientation == "up":
-            new_position = Robot(self.orientation, self.position_x, self.position_y + steps)
-        return new_position
+            self.position_y += steps
 
     def turn(self, direction):
         directions = ["left", "right"]
@@ -95,17 +95,16 @@ class Robot:
             for element, i in enumerate(rotation):
                 if i == self.orientation:
                     if element != 0:
-                        new_orientation = Robot(rotation[element - 1], self.position_x, self.position_y)
+                        self.orientation = rotation[element - 1]
                     else:
-                        new_orientation = Robot(rotation[-1], self.position_x, self.position_y)
+                        self.orientation = rotation[-1]
         else:
             for element, i in enumerate(rotation):
                 if i == self.orientation:
                     if i != rotation[-1]:
-                        new_orientation = Robot(rotation[element + 1], self.position_x, self.position_y)
+                        self.orientation = rotation[element + 1]
                     else:
-                        new_orientation = Robot(rotation[0], self.position_x, self.position_y)
-        return new_orientation
+                        self.orientation = rotation[0]
 
     def display_position(self):
         return f"This robot is located at point A({self.position_x}, {self.position_y}) of our map. It is facing {self.orientation}"
@@ -113,8 +112,8 @@ class Robot:
 
 robo = Robot("left", 0, 0)
 print(robo.display_position())
-robo = robo.move(5)
+robo.move(5)
 print(robo.display_position())
-robo = robo.turn("right")
-robo = robo.move(5)
+robo.turn("right")
+robo.move(5)
 print(robo.display_position())
