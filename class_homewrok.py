@@ -16,18 +16,19 @@ class Country:
         new_population = self.population + other_country.population
         return Country(new_name, new_population)
 
+
 # Task_1
 
 
-bosnia = Country('Bosnia', 10_000_000)
-herzegovina = Country('Herzegovina', 5_000_000)
+bosnia = Country("Bosnia", 10_000_000)
+herzegovina = Country("Herzegovina", 5_000_000)
 bosnia_herzegovina = bosnia.add(herzegovina)
 print(bosnia_herzegovina)
 
 # Task_2
 
-ukraine = Country('Ukraine', 37_000_000)
-usa = Country('USA', 333_000_000)
+ukraine = Country("Ukraine", 37_000_000)
+usa = Country("USA", 333_000_000)
 ukraine_usa = ukraine + usa
 print(ukraine_usa)
 
@@ -43,11 +44,9 @@ class Car:
         if speed < 0:
             raise ValueError("Speed can't be less than 0")
 
-    @property
     def accelerate(self):
         self.speed += 5
 
-    @property
     def brake(self):
         self.speed -= 5
         if self.speed < 0:
@@ -59,9 +58,9 @@ class Car:
 
 zaz = Car("ZAZ", "Slavuta", 1996, 4)
 print(zaz.display_speed())
-zaz.accelerate
+zaz.accelerate()
 print(zaz.display_speed())
-zaz.brake
+zaz.brake()
 print(zaz.display_speed())
 
 # Task_4
