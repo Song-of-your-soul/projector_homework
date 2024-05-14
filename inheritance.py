@@ -1,5 +1,6 @@
 # Task_1
 
+
 class Product:
     def __init__(self, name: str, price: int, quantity: int):
         self.name = name
@@ -13,7 +14,9 @@ class Book(Product):
         self.author = author
 
     def read(self):
-        print(f"This is {self.name}, written by {self.author}. Its price is {self.price}. {self.quantity} books were published")
+        print(
+            f"This is {self.name}, written by {self.author}. Its price is {self.price}. {self.quantity} books were published"
+        )
 
 
 book = Book("451 Fahrenheit", 25, 10_000_000, "Ray Douglas Bradbury")
@@ -83,13 +86,13 @@ class Account:
         if amount > 0:
             self._balance += amount
         else:
-            raise ValueError('Amount must be positive')
+            raise ValueError("Amount must be positive")
 
     def withdraw(self, amount):
         if amount > 0:
             self._balance -= amount
         else:
-            raise ValueError('Amount must be positive')
+            raise ValueError("Amount must be positive")
 
     def get_balance(self):
         return self._balance
@@ -98,7 +101,7 @@ class Account:
         return self._account_number
 
     def __str__(self):
-        return f'Account number: {self._account_number}, balance: {self._balance}'
+        return f"Account number: {self._account_number}, balance: {self._balance}"
 
 
 class SavingsAccount(Account):
@@ -126,7 +129,9 @@ class Bank:
                 account.gain_interest()
             elif isinstance(account, CurrentAccount):
                 if account.limit > account._balance:
-                    print(f"Hello! Unfortunately account {account._account_number} in overdraft. Please, top up the account!")
+                    print(
+                        f"Hello! Unfortunately account {account._account_number} in overdraft. Please, top up the account!"
+                    )
 
     def open_account(self, account_number: int):
         self.accounts.append(Account.create_account(account_number))
@@ -134,11 +139,10 @@ class Bank:
     def close_account(self, name: str):
         if name in self.accounts:
             self.accounts.remove(name)
-    
+
     def dividends(self, money: int):
         for account in self.accounts:
             account._balance += money
-            
 
 
 good_account = SavingsAccount(1000, 80991489, 200)
