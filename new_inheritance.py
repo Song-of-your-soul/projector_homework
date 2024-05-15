@@ -120,29 +120,29 @@ class CurrentAccount(Account):
 
 
 class Bank:
-    def __init__(self, accounts: list):
+    def __init__(self, accounts: dict):
         self.accounts = accounts
 
     def update(self):
-        for account in self.accounts:
-            if isinstance(account, SavingsAccount):
-                account.gain_interest()
-            elif isinstance(account, CurrentAccount):
-                if account.limit > account._balance:
+        for account in accounts.keys():
+            if isinstance(accounts[account], SavingsAccount):
+                accounts[account].gain_interest()
+            elif isinstance(accounts[account], CurrentAccount):
+                if accounts[account].limit > accounts[account]._balance:
                     print(
-                        f"Hello! Unfortunately account {account._account_number} in overdraft. Please, top up the account!"
+                        f"Hello! Unfortunately account { accounts[account]._account_number} in overdraft. Please, top up the account!"
                     )
 
     def open_account(self, account_number: int):
-        self.accounts.append(Account.create_account(account_number))
+        self.accounts.update({account_number: Account.create_account(account_number)})
 
-    def close_account(self, name: str):
-        if name in self.accounts:
-            self.accounts.remove(name)
+    def close_account(self, account_number: int):
+        if account_number in accounts.keys():
+            self.accounts.pop(account_number)
 
     def dividends(self, money: int):
-        for account in self.accounts:
-            account._balance += money
+        for account in accounts.keys():
+            accounts[account]._balance += money
 
 
 good_account = SavingsAccount(1000, 80991489, 200)
@@ -150,15 +150,20 @@ bad_account = CurrentAccount(300, 80971487, 500)
 okay_account = SavingsAccount(500, 81001500, 200)
 just_okay_account = CurrentAccount(700, 80000000, 500)
 
-accounts = [good_account, bad_account, okay_account, just_okay_account]
+accounts = {
+    good_account._account_number: good_account,
+    bad_account._account_number: bad_account,
+    okay_account._account_number: okay_account,
+    just_okay_account._account_number: just_okay_account
+}
 
 Hello_bank = Bank(accounts)
 Hello_bank.update()
-for account in Hello_bank.accounts:
+for account in Hello_bank.accounts.values():
     print(account)
-Hello_bank.close_account(okay_account)
+Hello_bank.close_account(81001500)
 Hello_bank.open_account(10101010)
 Hello_bank.dividends(1000)
 print("New balances: ")
-for account in Hello_bank.accounts:
+for account in Hello_bank.accounts.values():
     print(account)
