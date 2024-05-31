@@ -103,7 +103,12 @@ class TestBank(unittest.TestCase):
             self.assertEqual(account._balance, 0.0)
     
     def test_update(self):
+        mock = Mock()
+        print_original = print
+        builtins.print = mock
         old_bank.update_accounts()
+        assert mock.called, "Mock is not called"
+        builtins.print = print_original
         self.assertEqual(good_account._balance, 2400)
     
 unittest.main()
