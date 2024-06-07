@@ -91,6 +91,7 @@ blank_account = {}
 new_bank = Bank(blank_account)
 old_bank = Bank(accounts)
 
+
 class TestBank(unittest.TestCase):
     def test_Bank(self):
         with self.assertRaises(TypeError):
@@ -101,14 +102,12 @@ class TestBank(unittest.TestCase):
         for account in new_bank.accounts.values():
             self.assertIsInstance(account, Account)
             self.assertEqual(account._balance, 0.0)
-    
+        
     def test_update(self):
-        mock = Mock()
-        print_original = print
-        builtins.print = mock
-        old_bank.update_accounts()
-        assert mock.called, "Mock is not called"
-        builtins.print = print_original
-        self.assertEqual(good_account._balance, 2400)
-    
+        with patch('builtins.print') as mocked_print:
+            old_bank.update_accounts()
+            self.assertEqual(good_account._balance, 2400)
+            mocked_print.assert_called_once()
+
+
 unittest.main()
