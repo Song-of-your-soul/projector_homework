@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey,create_engine
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
@@ -12,10 +12,11 @@ class Student(Base):
     name = Column(String)
     age = Column(Integer)
 
-    def __init__(self, id, name, age):
+    def __init__(self, id, name, age, *args, **kwargs):
         self.id = id
         self.name = name
         self.age = age
+        super().__init__(*args, **kwargs)
 
 
 class Subject(Base):
